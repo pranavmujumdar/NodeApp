@@ -2,7 +2,7 @@
  * index for the api
  * 
  */
-
+'use strict'
  // Dependancies
  const http = require('http'); //for handling the http requests
  const url = require("url"); // for getting the url and it's path
@@ -24,11 +24,15 @@ const server = http.createServer((req, res) => {
     // get the method of the request
     var method = req.method.toLowerCase();
 
+    // get the headers from the req
+    var headers = req.headers;
+
     // send the response
     console.log("Hello");
     
     // log the request
     console.log("request receieved on path "+ trimmedPath+" and with these query String params ",queryStringObject);
+    console.log("headers ", headers);
     res.end(`request made for ${trimmedPath} with ${method}\n`);
 })
  // start the server at port 3000
