@@ -5,12 +5,40 @@
 'use strict'
  // Dependancies
 const http = require('http'); //for handling the http requests
+const https = require('https');
 const url = require("url"); // for getting the url and it's path
 const config = require('./config');
 const stringDecoder = require('string_decoder').StringDecoder;
- 
-// Server config 
-const server = http.createServer((req, res) => {
+const fs = require('fs') ;
+
+//Instantiate http server 
+const httpServer = http.createServer((req, res) => {
+    commonServer(req, res);
+})
+
+//Instantiate the HTTPS server
+const httpsServerOptions = {
+    'key': fs.readFileSync('./https/key.pem'),
+    'cert': fs.readFileSync('./https/cert.pem')
+};
+
+const httpsServer = https.createServer(httpsServerOptions, (req, res) => {
+    commonServer(req, res);
+})
+
+
+// start the HTTP server on the environemt port
+httpServer.listen(config.httpPort, ()=>{
+    console.log("Server up on "+config.httpPort+" on the " + config.envName + " environment");
+})
+
+// Start the HTTPS Server  
+httpsServer.listen(config.httpsPort, ()=>{
+    console.log("Server up on "+config.httpsPort+" on the " + config.envName + " environment");
+})
+
+// Common server logic for http and https
+var commonServer  = (req, res) => {
     // get the url
     var parsedUrl = url.parse(req.url, true);
 
@@ -78,16 +106,8 @@ const server = http.createServer((req, res) => {
         // console.log("headers ", headers);
         // console.log("PAyload ", buffer);
         // res.end(`request made for ${trimmedPath} with ${method}\n`);
-
-
-
-    }) 
-})
-
- // start the server on the environemt port
- server.listen(config.port, ()=>{
-     console.log("Server up on "+config.port+" on the " + config.envName + " environment");
- })
+    }); 
+}
 
  // Define the handlers
 var handlers = {};
