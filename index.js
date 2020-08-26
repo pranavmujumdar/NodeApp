@@ -6,8 +6,7 @@
  // Dependancies
 const http = require('http'); //for handling the http requests
 const url = require("url"); // for getting the url and it's path
-const { runInNewContext } = require('vm');
-const { type } = require('os');
+const config = require('./config');
 const stringDecoder = require('string_decoder').StringDecoder;
  
 // Server config 
@@ -63,14 +62,15 @@ const server = http.createServer((req, res) => {
             var payloadString = JSON.stringify(payload);
 
             //return the response
+            res.setHeader('Content-Type', 'application/json');
             res.writeHead(statusCode);
             res.end(payloadString);
 
             //log the response
-
-            console.log('Returning this string ', statusCode,payloadString);
+            console.log('Returning this string ', statusCode, payloadString);
         });
-        // // send the response
+
+        // send the response "older" 
         // console.log("Hello");
         
         // // log the request
@@ -84,12 +84,12 @@ const server = http.createServer((req, res) => {
     }) 
 })
 
- // start the server at port 3000
- server.listen(3000, ()=>{
-     console.log("Server up on port 3000!");
+ // start the server on the environemt port
+ server.listen(config.port, ()=>{
+     console.log("Server up on "+config.port+" on the " + config.envName + " environment");
  })
-// ahndlers
 
+ // Define the handlers
 var handlers = {};
 
 handlers.sample = (data, callback) =>
@@ -97,14 +97,13 @@ handlers.sample = (data, callback) =>
     // callback an http status code and a payload object
     callback(406,{'name':'sample handler 406'});
 };
-
+// default to notFound
 handlers.notFound = (data, callback) =>
 {
     callback(404);
 };
 
 //Routes
-
 
 var router = {
     'sample' : handlers.sample 
