@@ -3,14 +3,21 @@
  * 
  */
 'use strict'
- // Dependancies
+ // Dependencies
 const http = require('http'); //for handling the http requests
 const https = require('https');
 const url = require("url"); // for getting the url and it's path
 const config = require('./config');
 const stringDecoder = require('string_decoder').StringDecoder;
 const fs = require('fs') ;
+const _data = require('./lib/data');
 
+
+// TESTING THE 
+// @TODO delete this
+_data.update('test', 'newFile',{'fizz0':'Buzz'}, function(err){
+    console.log('this was the error', err);
+})
 //Instantiate http server 
 const httpServer = http.createServer((req, res) => {
     commonServer(req, res);
@@ -112,10 +119,10 @@ var commonServer  = (req, res) => {
  // Define the handlers
 var handlers = {};
 
-handlers.sample = (data, callback) =>
+handlers.ping = (data, callback) =>
 {
     // callback an http status code and a payload object
-    callback(406,{'name':'sample handler 406'});
+    callback(200);
 };
 // default to notFound
 handlers.notFound = (data, callback) =>
@@ -126,5 +133,5 @@ handlers.notFound = (data, callback) =>
 //Routes
 
 var router = {
-    'sample' : handlers.sample 
+    'ping' : handlers.ping 
 }
