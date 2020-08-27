@@ -10,14 +10,14 @@ const url = require("url"); // for getting the url and it's path
 const config = require('./config');
 const stringDecoder = require('string_decoder').StringDecoder;
 const fs = require('fs') ;
-const _data = require('./lib/data');
+// const _data = require('./lib/data'); for testing the crud operations
+const handlers = require('./lib/handlers');
 
-
-// TESTING THE 
-// @TODO delete this
-_data.delete('test', 'newFile', function(err){
-    console.log('this was the error', err);
-})
+// // TESTING THE CRUD operations 
+// // @TODO delete this
+// _data.delete('test', 'newFile', function(err){
+//     console.log('this was the error', err);
+// })
 //Instantiate http server 
 const httpServer = http.createServer((req, res) => {
     commonServer(req, res);
@@ -115,20 +115,6 @@ var commonServer  = (req, res) => {
         // res.end(`request made for ${trimmedPath} with ${method}\n`);
     }); 
 }
-
- // Define the handlers
-var handlers = {};
-
-handlers.ping = (data, callback) =>
-{
-    // callback an http status code and a payload object
-    callback(200);
-};
-// default to notFound
-handlers.notFound = (data, callback) =>
-{
-    callback(404);
-};
 
 //Routes
 
