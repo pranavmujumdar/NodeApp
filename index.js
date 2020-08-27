@@ -7,11 +7,12 @@
 const http = require('http'); //for handling the http requests
 const https = require('https');
 const url = require("url"); // for getting the url and it's path
-const config = require('./config');
+const config = require('./lib/config');
 const stringDecoder = require('string_decoder').StringDecoder;
 const fs = require('fs') ;
 // const _data = require('./lib/data'); for testing the crud operations
 const handlers = require('./lib/handlers');
+const helpers = require('./lib/helpers');
 
 // // TESTING THE CRUD operations 
 // // @TODO delete this
@@ -83,7 +84,7 @@ var commonServer  = (req, res) => {
             'queryStringObject' : queryStringObject,
             'method' : method,
             'headers' : headers,
-            'payload' : buffer
+            'payload' : helpers.parseJsonToObject(buffer)
         } 
 
         // route the request to the handler
