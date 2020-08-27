@@ -119,5 +119,6 @@ var commonServer  = (req, res) => {
 //Routes
 
 var router = {
-    'ping' : handlers.ping 
+    'ping' : handlers.ping,
+    'users' : handlers.users
 }
