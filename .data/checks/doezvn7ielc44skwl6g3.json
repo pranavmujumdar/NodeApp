@@ -1,1 +1,1 @@
-{"id":"doezvn7ielc44skwl6g3","userPhone":"1234567890","protocol":"http","url":"facebook.com","method":"get","successCodes":[200,201],"timeOutSeconds":5}
+{"id":"doezvn7ielc44skwl6g3","userPhone":"1234567890","protocol":"https","url":"facebook.com","method":"get","successCodes":[200,201],"timeOutSeconds":1}
