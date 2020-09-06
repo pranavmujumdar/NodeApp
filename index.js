@@ -14,11 +14,12 @@ const fs = require('fs');
 const handlers = require('./lib/handlers');
 const helpers = require('./lib/helpers');
 
-// // TESTING THE CRUD operations 
-// // @TODO delete this
-// _data.delete('test', 'newFile', function(err){
-//     console.log('this was the error', err);
-// })
+//  TESTING THE CRUD operations 
+//  @TODO delete this
+helpers.sendTwilioSms('8577637793','test', function(err){
+  console.log('this was the error', err);
+});
+
 //Instantiate http server 
 const httpServer = http.createServer((req, res) => {
   commonServer(req, res);
