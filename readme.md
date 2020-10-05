@@ -3,6 +3,7 @@
 ## Functionalities:
 * Users can enter a url they want to monitor and receive text alerts when the url goes down or is back online
 * sign up and sign in features
+* Twilio API to trigger text messages on state change (please create account and get auth token from https://www.twilio.com/ and edit the config.js file accordingly )
 
 ## API Specifications
 1. Accepts CRUD requests
@@ -56,3 +57,36 @@
     
     1. qString: phone
     2. Headers: token
+
+2. Tokens http://localhost:3000/tokens
+    GET: Get the token and it's associated account, and it's expiry
+    
+    * Required Params 
+    
+    1. qString: token id
+    
+    POST: Create a token for a user
+    
+    * Required Params 
+    
+    Body: 
+    
+    ```javascript
+            'phone': Number, //must be equal to 10
+            'password': String, 
+    ```
+
+    PUT: Extend the token expiry by a predefined time
+
+    * Required Params 
+
+    1. Body:
+    ```javascript
+            'tokenId': String, // optional
+            'extends': true, // optional
+    ```
+    DELETE: Delete the Toke
+
+    * Required Params 
+    
+    1. qString: tokenId
