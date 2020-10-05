@@ -90,3 +90,47 @@
     * Required Params 
     
     1. qString: tokenId
+
+2. Checks http://localhost:3000/checks
+    GET: Get the check info
+    
+    * Required Params 
+    
+    1. Headers: token id
+    2. qString: check id
+    
+    POST: Create a check for a user
+    
+    * Required Params 
+    1. Headers: Token id
+    2. Body: 
+
+    ```javascript
+      'id': checkID,
+      'userPhone': userPhone,
+      'protocol': protocol,
+      'url': url,
+      'method': method,
+      'successCodes': successCodes,
+      'timeOutSeconds': timeOutSeconds
+    ```
+
+    PUT: Modify the check attributes 
+
+    * Required Params 
+    1. Headers: Token id
+    2. Body:
+    ```javascript
+      'id': checkID, // Required
+      'protocol': protocol, // optional
+      'url': url, //optional
+      'method': method, //optional
+      'successCodes': successCodes, //optional
+      'timeOutSeconds': timeOutSeconds //optional
+    ```
+    DELETE: Delete the Check
+
+    * Required Params 
+    
+    1. qString: Check id
+    2. Headers: Token id
