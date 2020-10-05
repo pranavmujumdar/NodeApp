@@ -17,7 +17,7 @@
 ## Temporarily stored in file system rather than a database
 
 ## All the Requests
-1. Users http://localhost:3000/users
+### 1. Users http://localhost:3000/users
     GET: Get the users checks and info
     
     * Required Params 
@@ -58,7 +58,7 @@
     1. qString: phone
     2. Headers: token
 
-2. Tokens http://localhost:3000/tokens
+### 2. Tokens http://localhost:3000/tokens
     GET: Get the token and it's associated account, and it's expiry
     
     * Required Params 
@@ -91,7 +91,8 @@
     
     1. qString: tokenId
 
-2. Checks http://localhost:3000/checks
+
+### 3. Checks http://localhost:3000/checks
     GET: Get the check info
     
     * Required Params 
